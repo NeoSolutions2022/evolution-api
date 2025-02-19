@@ -44,6 +44,12 @@ COPY --from=builder /evolution/package-lock.json ./package-lock.json
 COPY --from=builder /evolution/node_modules ./node_modules
 COPY --from=builder /evolution/dist ./dist
 COPY --from=builder /evolution/prisma ./prisma
+# Após copiar o Prisma
+COPY ./prisma ./prisma
+
+# Verificar se a pasta realmente foi copiada
+RUN ls -la prisma
+
 COPY --from=builder /evolution/manager ./manager
 COPY --from=builder /evolution/public ./public
 COPY --from=builder /evolution/.env ./.env
